@@ -1,14 +1,18 @@
 package main
 
 import (
+	"encoding/json"
 	"errors"
-	"fmt"
-	"io/ioutil"
 	"net/http"
+	"net/url"
+	"time"
 
-	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 )
+
+type payload struct {
+	Text string `json:"text"`
+}
 
 var (
 	// DefaultHTTPGetAddress Default Address
@@ -21,31 +25,19 @@ var (
 	ErrNon200Response = errors.New("Non 200 Response found")
 )
 
-func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	resp, err := http.Get(DefaultHTTPGetAddress)
+func OnlyErrors() error {
+	p, err := json.Marshal(payload{Text: time.Now().Format("2006-01-02 15:04:05") + "08: Hira"})
 	if err != nil {
-		return events.APIGatewayProxyResponse{}, err
+		return err
 	}
-
-	if resp.StatusCode != 200 {
-		return events.APIGatewayProxyResponse{}, ErrNon200Response
-	}
-
-	ip, err := ioutil.ReadAll(resp.Body)
+	resp, err := http.PostForm("https://hooks.slack.com/services/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", url.Values{"payload": {string(p)}})
 	if err != nil {
-		return events.APIGatewayProxyResponse{}, err
+		return err
 	}
-
-	if len(ip) == 0 {
-		return events.APIGatewayProxyResponse{}, ErrNoIP
-	}
-
-	return events.APIGatewayProxyResponse{
-		Body:       fmt.Sprintf("Hello, %v", string(ip)),
-		StatusCode: 200,
-	}, nil
+	defer resp.Body.Close()
+	return nil
 }
 
 func main() {
-	lambda.Start(handler)
+	lambda.Start(OnlyErrors)
 }

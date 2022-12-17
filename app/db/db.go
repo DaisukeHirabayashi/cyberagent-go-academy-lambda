@@ -14,7 +14,6 @@ var (
 
 func Init() {
 	log.Print("DB init...")
-	// TODO : os.Getenv("DATABASE_URL") does not work...
 	databaseUrl := "academy08:78fqoLQpJ9XXpAab8fVuQmbzdmhACZ@(ca-academy-db.c9ml7do7yvmn.ap-northeast-1.rds.amazonaws.com:3306)/academy08"
 	db, err = gorm.Open("mysql", databaseUrl)
 	if err != nil {

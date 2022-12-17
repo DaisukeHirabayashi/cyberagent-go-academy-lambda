@@ -1,12 +1,9 @@
 package main
 
 import (
-	"encoding/json"
 	"errors"
-	"net/http"
-	"net/url"
-	"time"
 
+	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/db"
 	"github.com/aws/aws-lambda-go/lambda"
 )
 
@@ -26,15 +23,8 @@ var (
 )
 
 func OnlyErrors() error {
-	p, err := json.Marshal(payload{Text: time.Now().Format("2006-01-02 15:04:05") + "08: Hira"})
-	if err != nil {
-		return err
-	}
-	resp, err := http.PostForm("https://hooks.slack.com/services/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", url.Values{"payload": {string(p)}})
-	if err != nil {
-		return err
-	}
-	defer resp.Body.Close()
+	db.Init()
+	defer db.Close()
 	return nil
 }
 

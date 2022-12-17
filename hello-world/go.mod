@@ -5,4 +5,3 @@ replace gopkg.in/yaml.v2 => gopkg.in/yaml.v2 v2.2.8
 module github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda
 
 go 1.16
-

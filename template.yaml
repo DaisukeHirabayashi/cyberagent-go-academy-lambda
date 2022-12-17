@@ -11,11 +11,11 @@ Globals:
     Timeout: 5
 
 Resources:
-  HelloWorldFunction:
+  GetDataFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: hello-world/
-      Handler: hello-world
+      CodeUri: app/
+      Handler: app
       Runtime: go1.x
       Architectures:
         - x86_64
@@ -34,5 +34,5 @@ Outputs:
   # Find out more about other implicit resources you can reference within SAM
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
   HelloWorldFunction:
-    Description: "First Lambda Function ARN"
-    Value: !GetAtt HelloWorldFunction.Arn
+    Description: "Get Data Function From Data"
+    Value: !GetAtt GetDataFunction.Arn

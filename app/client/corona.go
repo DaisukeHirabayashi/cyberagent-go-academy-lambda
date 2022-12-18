@@ -20,7 +20,10 @@ func GetMedicalSystem(prefecuture *string, day *string) {
 	req, _ := http.NewRequest(http.MethodGet, url, nil)
 
 	q := req.URL.Query()
-	q.Add("prefName", "石川県")
+
+	if prefecuture != nil {
+		q.Add("prefName", *prefecuture)
+	}
 
 	resp, err := client.Do(req)
 	log.Print(resp)

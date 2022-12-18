@@ -1,8 +1,7 @@
 package service
 
 import (
-	"log"
-
+	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/client"
 	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/db"
 	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/entity"
 )
@@ -16,7 +15,8 @@ func GetLastDayOutpatientHistory() error {
 		return err
 	}
 
-	log.Print(prefectures)
+	prefecture := "石川県"
+	client.GetMedicalSystem(&prefecture, nil)
 
 	return nil
 }

@@ -8,10 +8,6 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 )
 
-type payload struct {
-	Text string `json:"text"`
-}
-
 var (
 	// DefaultHTTPGetAddress Default Address
 	DefaultHTTPGetAddress = "https://checkip.amazonaws.com"
@@ -27,7 +23,6 @@ func OnlyErrors() error {
 	db.Init()
 	defer db.Close()
 	// service.GetBooks()
-	// client.GetMedicalSystem(nil, nil)
 	service.GetLastDayOutpatientHistory()
 	return nil
 }

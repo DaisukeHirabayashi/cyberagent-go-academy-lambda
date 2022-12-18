@@ -1,9 +1,12 @@
 package client
 
 import (
+	"encoding/json"
 	"io"
 	"log"
 	"net/http"
+
+	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/dao"
 )
 
 var host = "https://opendata.corona.go.jp/"
@@ -37,12 +40,8 @@ func GetMedicalSystem() {
 
 	// Response Body を読み取り
 	body, _ := io.ReadAll(resp.Body)
-	log.Print(string(body))
 
-	// // JSONを構造体にエンコード
-	// var Books Root
-	// json.Unmarshal(body, &Books)
-
-	// fmt.Printf("%-v", Books)
-
+	// JSONを構造体にエンコード
+	var Hospitals []dao.Hospital
+	json.Unmarshal(body, &Hospitals)
 }

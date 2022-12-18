@@ -11,7 +11,7 @@ import (
 
 var host = "https://opendata.corona.go.jp/"
 
-func GetMedicalSystem() {
+func GetMedicalSystem(prefecuture *string, day *string) {
 	log.Println("Get")
 
 	url := host + "api/covid19DailySurvey"

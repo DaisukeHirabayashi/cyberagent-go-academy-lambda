@@ -3,7 +3,6 @@ package main
 import (
 	"errors"
 
-	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/client"
 	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/db"
 	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/service"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -27,8 +26,9 @@ var (
 func OnlyErrors() error {
 	db.Init()
 	defer db.Close()
-	service.GetBooks()
-	client.GetMedicalSystem()
+	// service.GetBooks()
+	// client.GetMedicalSystem(nil, nil)
+	service.GetLastDayOutpatientHistory()
 	return nil
 }
 

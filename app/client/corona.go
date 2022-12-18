@@ -23,6 +23,7 @@ func GetMedicalSystem(prefecuture *string, day *string) {
 
 	if prefecuture != nil {
 		q.Add("prefName", *prefecuture)
+		req.URL.RawQuery = q.Encode()
 	}
 
 	resp, err := client.Do(req)
@@ -45,6 +46,7 @@ func GetMedicalSystem(prefecuture *string, day *string) {
 	body, _ := io.ReadAll(resp.Body)
 
 	// JSONを構造体にエンコード
-	var Hospitals []dao.Hospital
-	json.Unmarshal(body, &Hospitals)
+	var hospitals []dao.Hospital
+	json.Unmarshal(body, &hospitals)
+	log.Println("Error Request:", hospitals[0])
 }

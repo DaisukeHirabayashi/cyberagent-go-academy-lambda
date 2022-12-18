@@ -15,8 +15,10 @@ func GetLastDayOutpatientHistory() error {
 		return err
 	}
 
-	prefecture := "石川県"
-	client.GetMedicalSystem(&prefecture, nil)
+	for _, prefecture := range prefectures {
+		pref := prefecture.Name
+		client.GetMedicalSystem(&pref, nil)
+	}
 
 	return nil
 }

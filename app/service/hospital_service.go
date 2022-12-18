@@ -1,7 +1,11 @@
 package service
 
 import (
+	"encoding/json"
+	"log"
+
 	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/client"
+	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/dao"
 	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/db"
 	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/entity"
 )
@@ -17,7 +21,10 @@ func GetLastDayOutpatientHistory() error {
 
 	for _, prefecture := range prefectures {
 		pref := prefecture.Name
-		client.GetMedicalSystem(&pref, nil)
+		reponse_body, _ := client.GetMedicalSystem(&pref, nil)
+		var hospitals []dao.Hospital
+		json.Unmarshal(reponse_body, &hospitals)
+		log.Println("Error Request:", hospitals[0])
 	}
 
 	return nil

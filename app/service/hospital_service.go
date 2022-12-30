@@ -21,7 +21,7 @@ func GetLastDayOutpatientHistory() []dao.Hospital {
 }
 
 func CreateOutpatientHistoires(dao_hospitals []dao.Hospital) error {
-	db := db.GetDB()
+	db := db.Init()
 	outpatinet_histories, err := mapper.HospitalDaosToOutpatientHistorys(dao_hospitals)
 	if err != nil {
 		log.Println("Error:", err)

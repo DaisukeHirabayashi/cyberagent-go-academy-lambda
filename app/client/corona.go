@@ -8,20 +8,14 @@ import (
 
 var host = "https://opendata.corona.go.jp/"
 
-func GetMedicalSystem(prefecuture *string, day *string) ([]byte, error) {
+func GetMedicalSystem(time *string) ([]byte, error) {
 	log.Println("Get")
 
-	url := host + "api/covid19DailySurvey"
+	url := host + "api/covid19DailySurvey/" + *time
+	log.Print(url)
 
 	client := new(http.Client)
 	req, _ := http.NewRequest(http.MethodGet, url, nil)
-
-	q := req.URL.Query()
-
-	if prefecuture != nil {
-		q.Add("prefName", *prefecuture)
-		req.URL.RawQuery = q.Encode()
-	}
 
 	resp, err := client.Do(req)
 	log.Print(resp)

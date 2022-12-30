@@ -1,6 +1,6 @@
 CREATE TABLE `outpatient_histories` (
     `id` INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    `facility_id` INT,
+    `facility_id` VARCHAR(255),
     `facility_name` VARCHAR(255),
     `zip_cod` VARCHAR(255),
     `pref_name` VARCHAR(255),

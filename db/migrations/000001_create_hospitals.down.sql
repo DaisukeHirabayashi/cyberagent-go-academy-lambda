@@ -1,1 +1,1 @@
-DROP TABLE IF EXISTS hospitals;
+DROP TABLE IF EXISTS outpatient_histories;

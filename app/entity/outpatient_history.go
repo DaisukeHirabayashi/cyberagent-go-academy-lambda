@@ -4,7 +4,7 @@ import "time"
 
 type OutpatientHistory struct {
 	Id           uint      `json:"id"`
-	FacilityId   uint      `json:"facility_id"`
+	FacilityId   string    `json:"facility_id"`
 	FacilityName string    `json:"facility_name"`
 	ZipCode      string    `json:"zip_code"`
 	PrefName     string    `json:"pref_name"`

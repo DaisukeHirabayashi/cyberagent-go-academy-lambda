@@ -6,7 +6,7 @@ type OutpatientHistory struct {
 	Id           uint      `json:"id"`
 	FacilityId   string    `json:"facility_id"`
 	FacilityName string    `json:"facility_name"`
-	ZipCode      string    `json:"zip_code"`
+	ZipCod       string    `json:"zip_cod"`
 	PrefName     string    `json:"pref_name"`
 	FacilityAddr string    `json:"facility_addr"`
 	FacilityTel  string    `json:"facility_tel"`
@@ -15,7 +15,7 @@ type OutpatientHistory struct {
 	AnsType      string    `json:"ans_type"`
 	LocalGovCode string    `json:"local_gov_code"`
 	CityName     string    `json:"city_name"`
-	FaciltyCode  string    `json:"facility_code"`
+	FacilityCode string    `json:"facility_code"`
 	CreatedAt    time.Time `json:"created_at"`
 	UpdatedAt    time.Time `json:"updated_at"`
 }

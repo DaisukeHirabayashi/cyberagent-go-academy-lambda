@@ -1,6 +1,7 @@
 require (
 	github.com/aws/aws-lambda-go v1.23.0
-	github.com/jinzhu/gorm v1.9.16
+	gorm.io/driver/mysql v1.4.4
+	gorm.io/gorm v1.24.2
 )
 
 replace gopkg.in/yaml.v2 => gopkg.in/yaml.v2 v2.2.8

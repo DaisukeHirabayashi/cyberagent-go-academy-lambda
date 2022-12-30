@@ -8,7 +8,7 @@ import (
 )
 
 func GetBooks() error {
-	db := db.GetDB()
+	db := db.Init()
 	var books []entity.Book
 
 	if err := db.Find(&books).Error; err != nil {

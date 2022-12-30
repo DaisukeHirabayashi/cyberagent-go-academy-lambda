@@ -23,7 +23,8 @@ func OnlyErrors() error {
 	db.Init()
 	defer db.Close()
 	// service.GetBooks()
-	service.GetLastDayOutpatientHistory()
+	outpatientHistories := service.GetLastDayOutpatientHistory()
+	service.CreateOutpatientHistoires(outpatientHistories)
 	return nil
 }
 

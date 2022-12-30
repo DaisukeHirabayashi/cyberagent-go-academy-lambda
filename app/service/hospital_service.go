@@ -27,12 +27,9 @@ func CreateOutpatientHistoires(dao_hospitals []dao.Hospital) error {
 		log.Println("Error:", err)
 		return err
 	}
-	for i, outpatinet_history := range outpatinet_histories {
-		if err := db.Create(&outpatinet_history).Error; err != nil {
-			log.Println("Error:", i, "番目:", outpatinet_history)
-			return err
-		}
+	if err := db.CreateInBatches(&outpatinet_histories, 1000).Error; err != nil {
+		log.Println("Error:", err)
+		return err
 	}
-
 	return nil
 }

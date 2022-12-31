@@ -12,12 +12,17 @@ import (
 )
 
 // 前日の履歴を取ってくる
-func GetLastDayOutpatientHistory() []dao.Hospital {
+func GetLastDayOutpatientHistory() ([]dao.Hospital, error) {
 	time := time.Now().Format("20060102")
-	reponse_body, _ := client.GetMedicalSystem(&time)
+	reponse_body, err := client.GetMedicalSystem(&time)
+	if err != nil {
+		log.Println("Error:", err)
+		return nil, err
+	}
+
 	var hospitals []dao.Hospital
 	json.Unmarshal(reponse_body, &hospitals)
-	return hospitals
+	return hospitals, nil
 }
 
 func CreateOutpatientHistoires(dao_hospitals []dao.Hospital) error {

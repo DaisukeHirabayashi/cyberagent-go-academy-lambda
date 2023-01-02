@@ -13,7 +13,7 @@ import (
 
 // 前日の履歴を取ってくる
 func GetLastDayOutpatientHistory() ([]dao.Hospital, error) {
-	time := time.Now().Format("20060102")
+	time := time.Now().AddDate(0, 0, -1).Format("20060102")
 	reponse_body, err := client.GetMedicalSystem(&time)
 	if err != nil {
 		log.Println("Error:", err)

@@ -7,7 +7,7 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 )
 
-func OnlyErrors() error {
+func CreateOutpatientHistoires() error {
 	//service.GetBooks()
 	outpatientHistories, err := service.GetLastDayOutpatientHistory()
 	if err != nil {
@@ -27,5 +27,5 @@ func OnlyErrors() error {
 }
 
 func main() {
-	lambda.Start(OnlyErrors)
+	lambda.Start(CreateOutpatientHistoires)
 }

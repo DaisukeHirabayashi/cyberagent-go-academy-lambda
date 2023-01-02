@@ -26,11 +26,12 @@ type payload struct {
 }
 
 func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	p, err := json.Marshal(payload{Text: request.PathParameters["message"]})
+	p, err := json.Marshal(payload{Text: request.MultiValueQueryStringParameters["message"][0]})
+
 	if err != nil {
 		return events.APIGatewayProxyResponse{}, err
 	}
-	resp, err := http.PostForm("https://hooks.slack.com/services/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", url.Values{"payload": {string(p)}})
+	resp, err := http.PostForm("https://hooks.slack.com/services/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", url.Values{"payload": {string(p)}})
 	if err != nil {
 		return events.APIGatewayProxyResponse{}, err
 	}

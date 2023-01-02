@@ -8,7 +8,6 @@ import (
 )
 
 func CreateOutpatientHistoires() error {
-	//service.GetBooks()
 	outpatientHistories, err := service.GetLastDayOutpatientHistory()
 	if err != nil {
 		go http.Get("http://127.0.0.1:3000/notification?message=" + "error GetLastDayOutpatientHistory:" + err.Error())

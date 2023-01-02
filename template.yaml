@@ -28,6 +28,23 @@ Resources:
         Variables:
           PARAM1: VALUE
       Role: arn:aws:iam::880843126767:role/go-academy-lambda
+  CreateCityOutPatientBatch:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: app/batch/create_city_patient
+      Handler: create_city_patient
+      Runtime: go1.x
+      Architectures:
+        - x86_64
+      Events:
+        ScheduleEvent:
+          Type: Schedule
+          Properties:
+            Schedule: rate(1 minute)
+      Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+        Variables:
+          PARAM1: VALUE
+      Role: arn:aws:iam::880843126767:role/go-academy-lambda
   SlackNotificationFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:

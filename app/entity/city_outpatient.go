@@ -2,7 +2,7 @@ package entity
 
 import "time"
 
-type CityPatient struct {
+type City_Outpatient struct {
 	Id         uint      `json:"id"`
 	PrefName   string    `json:"pref_name"`
 	CityName   string    `json:"city_name"`

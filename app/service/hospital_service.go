@@ -42,17 +42,17 @@ func CreateOutpatientHistoires(dao_hospitals []dao.Hospital) error {
 
 func CreateCityOutPatients() error {
 	db := db.Init()
-	var city_outpatients []entity.CityPatient
+	var city_outpatients []entity.City_Outpatient
 
 	err := db.Table("outpatient_histories").Select("pref_name, city_name, submit_date, count(*) as number").Group("pref_name, city_name, submit_date").Scan(&city_outpatients).Error
 	if err != nil {
 		log.Println("Error:", err)
 		return err
 	}
-	log.Println(city_outpatients)
-	// if err := db.CreateInBatches(&city_outpatients, 1000).Error; err != nil {
-	// 	log.Println("Error:", err)
-	// 	return err
-	// }
+	if err := db.CreateInBatches(&city_outpatients, 100).Error; err != nil {
+		log.Println("Error:", err)
+		return err
+	}
+	log.Println("Create Success:", err)
 	return nil
 }

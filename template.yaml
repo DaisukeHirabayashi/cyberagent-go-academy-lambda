@@ -28,6 +28,24 @@ Resources:
         Variables:
           PARAM1: VALUE
       Role: arn:aws:iam::880843126767:role/go-academy-lambda
+  SlackNotificationFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: slack/
+      Handler: slack
+      Runtime: go1.x
+      Architectures:
+        - x86_64
+      Events:
+        CatchAll:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /notification
+            Method: GET
+      Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+        Variables:
+          PARAM1: VALUE
+      Role: arn:aws:iam::880843126767:role/go-academy-lambda
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function

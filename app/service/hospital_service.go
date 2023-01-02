@@ -8,6 +8,7 @@ import (
 	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/client"
 	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/dao"
 	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/db"
+	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/entity"
 	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/mapper"
 )
 
@@ -36,5 +37,22 @@ func CreateOutpatientHistoires(dao_hospitals []dao.Hospital) error {
 		log.Println("Error:", err)
 		return err
 	}
+	return nil
+}
+
+func CreateCityOutPatients() error {
+	db := db.Init()
+	var city_outpatients []entity.CityPatient
+
+	err := db.Table("outpatient_histories").Select("pref_name, city_name, submit_date, count(*)").Group("pref_name, city_name, submit_date").Scan(&city_outpatients).Error
+	if err != nil {
+		log.Println("Error:", err)
+		return err
+	}
+	log.Println(city_outpatients)
+	// if err := db.CreateInBatches(&city_outpatients, 1000).Error; err != nil {
+	// 	log.Println("Error:", err)
+	// 	return err
+	// }
 	return nil
 }

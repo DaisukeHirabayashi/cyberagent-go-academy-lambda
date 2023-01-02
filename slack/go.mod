@@ -1,4 +1,4 @@
-module github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda
+module github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/slack
 
 go 1.19
 

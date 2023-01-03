@@ -23,3 +23,12 @@ func HospitalDaosToOutpatientHistorys(dao_hospitals []dao.Hospital) ([]entity.Ou
 
 	return outpatient_histries, nil
 }
+
+func OutpatientHistoryEntityToTmpOutPatientHistory(outpatient_histories []entity.OutpatientHistory) []entity.TmpOutpatientHistory {
+	var tmp_outpatient_histories []entity.TmpOutpatientHistory
+	for _, outpatient_history := range outpatient_histories {
+		tmp_outpatient_history := entity.TmpOutpatientHistory(outpatient_history)
+		tmp_outpatient_histories = append(tmp_outpatient_histories, tmp_outpatient_history)
+	}
+	return tmp_outpatient_histories
+}

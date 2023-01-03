@@ -29,10 +29,18 @@ func GetLastDayOutpatientHistory() ([]dao.Hospital, error) {
 func CreateOutpatientHistoires(dao_hospitals []dao.Hospital) error {
 	db := db.Init()
 	outpatinet_histories, err := mapper.HospitalDaosToOutpatientHistorys(dao_hospitals)
+	tmp_outpatinet_histories := mapper.OutpatientHistoryEntityToTmpOutPatientHistory(outpatinet_histories)
+
 	if err != nil {
 		log.Println("Error:", err)
 		return err
 	}
+
+	if err := db.CreateInBatches(&tmp_outpatinet_histories, 1000).Error; err != nil {
+		log.Println("Error:", err)
+		return err
+	}
+
 	if err := db.CreateInBatches(&outpatinet_histories, 1000).Error; err != nil {
 		log.Println("Error:", err)
 		return err

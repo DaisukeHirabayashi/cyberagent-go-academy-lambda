@@ -48,8 +48,8 @@ Resources:
   SlackNotificationFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: app/api
-      Handler: slack
+      CodeUri: app/api/slack_notification
+      Handler: slack_notification
       Runtime: go1.x
       Architectures:
         - x86_64

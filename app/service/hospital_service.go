@@ -52,7 +52,7 @@ func CreateCityOutPatients() error {
 	db := db.Init()
 	var city_outpatients []entity.City_Outpatient
 
-	err := db.Table("outpatient_histories").Select("pref_name, city_name, submit_date, count(*) as number").Group("pref_name, city_name, submit_date").Scan(&city_outpatients).Error
+	err := db.Table("tmp_outpatient_histories").Select("pref_name, city_name, submit_date, count(*) as number").Group("pref_name, city_name, submit_date").Scan(&city_outpatients).Error
 	if err != nil {
 		log.Println("Error:", err)
 		return err
@@ -61,6 +61,7 @@ func CreateCityOutPatients() error {
 		log.Println("Error:", err)
 		return err
 	}
-	log.Println("Create Success:", err)
+	db.Exec("TRUNCATE TABLE tmp_outpatient_histories")
+	log.Println("Create Success")
 	return nil
 }

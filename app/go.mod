@@ -1,5 +1,6 @@
 require (
 	github.com/aws/aws-lambda-go v1.23.0
+	github.com/jarcoal/httpmock v1.2.0
 	gorm.io/driver/mysql v1.4.4
 	gorm.io/gorm v1.24.2
 )

@@ -8,7 +8,7 @@ import (
 )
 
 func CreateOutpatientHistoires() error {
-	go http.Get("https://a5pky2m9q6.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=" + "昨日のデータ取得開始")
+	go http.Get("https://a5pky2m9q6.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=" + ":rocket: start batch for create last day patient history")
 
 	outpatientHistories, err := service.GetLastDayOutpatientHistory()
 	if err != nil {
@@ -21,7 +21,7 @@ func CreateOutpatientHistoires() error {
 		go http.Get("https://a5pky2m9q6.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=" + "error GetLastDayOutpatientHistory:" + err.Error())
 	}
 
-	go http.Get("https://a5pky2m9q6.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=" + "昨日のデータ取得終了")
+	go http.Get("https://a5pky2m9q6.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=" + ":rocket: finish start batch for create last day patient history")
 	return nil
 }
 

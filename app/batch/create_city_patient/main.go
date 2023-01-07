@@ -11,7 +11,7 @@ func CreateOutpatientHistoires() error {
 	go http.Get("https://a5pky2m9q6.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=:rocket:start_batch_for_create_last_day_outpatient_hisotory")
 	err := service.CreateCityOutPatients()
 	if err != nil {
-		go http.Get("http://127.0.0.1:3000/notification?message=" + "error GetLastDayOutpatientHistory:" + err.Error())
+		go http.Get("https://a5pky2m9q6.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=" + "error GetLastDayOutpatientHistory:" + err.Error())
 	}
 	go http.Get("https://a5pky2m9q6.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=:tada:start_batch_for_create_last_day_outpatient_hisotory")
 	return nil

@@ -21,7 +21,7 @@ func CreateOutpatientHistoires() error {
 		go http.Get("https://a5pky2m9q6.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=" + "error GetLastDayOutpatientHistory:" + err.Error())
 	}
 
-	go http.Get("https://a5pky2m9q6.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=" + ":rocket: finish start batch for create last day patient history")
+	go http.Get("https://a5pky2m9q6.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=" + ":tada: finish start batch for create last day patient history")
 	return nil
 }
 

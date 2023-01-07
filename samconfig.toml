@@ -2,7 +2,7 @@ version = 0.1
 [default]
 [default.deploy]
 [default.deploy.parameters]
-stack_name = "cyberagent-go-academy-lambda"
+stack_name = "sam-app-ca-08-cyberaget-app"
 s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1chmzs3joeuh3"
 s3_prefix = "cyberagent-go-academy-lambda"
 region = "ap-northeast-1"

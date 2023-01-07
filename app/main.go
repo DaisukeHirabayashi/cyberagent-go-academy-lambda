@@ -10,13 +10,13 @@ import (
 func CreateOutpatientHistoires() error {
 	outpatientHistories, err := service.GetLastDayOutpatientHistory()
 	if err != nil {
-		go http.Get("http://127.0.0.1:3000/notification?message=" + "error GetLastDayOutpatientHistory:" + err.Error())
+		go http.Get("https://a5pky2m9q6.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=" + "error GetLastDayOutpatientHistory:" + err.Error())
 	}
 
 	err = service.CreateOutpatientHistoires(outpatientHistories)
 
 	if err != nil {
-		go http.Get("http://127.0.0.1:3000/notification?message=" + "error GetLastDayOutpatientHistory:" + err.Error())
+		go http.Get("https://a5pky2m9q6.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=" + "error GetLastDayOutpatientHistory:" + err.Error())
 	}
 	return nil
 }

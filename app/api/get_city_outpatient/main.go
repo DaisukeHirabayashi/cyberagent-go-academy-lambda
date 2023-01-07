@@ -10,7 +10,7 @@ import (
 )
 
 func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	city_outpatients, err := service.GetCityPatients()
+	city_outpatients, err := service.GetCityPatients(request)
 
 	if err != nil {
 		return events.APIGatewayProxyResponse{}, err

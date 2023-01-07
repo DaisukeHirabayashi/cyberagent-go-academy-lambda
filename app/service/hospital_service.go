@@ -10,6 +10,7 @@ import (
 	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/db"
 	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/entity"
 	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/mapper"
+	"gorm.io/gorm"
 )
 
 // 前日の履歴を取ってくる
@@ -36,15 +37,18 @@ func CreateOutpatientHistoires(dao_hospitals []dao.Hospital) error {
 		return err
 	}
 
-	if err := db.CreateInBatches(&tmp_outpatinet_histories, 1000).Error; err != nil {
-		log.Println("Error:", err)
-		return err
-	}
+	db.Transaction(func(tx *gorm.DB) error {
+		if err := tx.CreateInBatches(&tmp_outpatinet_histories, 1000).Error; err != nil {
+			log.Println("Error:", err)
+			return err
+		}
 
-	if err := db.CreateInBatches(&outpatinet_histories, 1000).Error; err != nil {
-		log.Println("Error:", err)
-		return err
-	}
+		if err := db.CreateInBatches(&outpatinet_histories, 1000).Error; err != nil {
+			log.Println("Error:", err)
+			return err
+		}
+		return nil
+	})
 	return nil
 }
 
@@ -57,11 +61,16 @@ func CreateCityOutPatients() error {
 		log.Println("Error:", err)
 		return err
 	}
-	if err := db.CreateInBatches(&city_outpatients, 100).Error; err != nil {
-		log.Println("Error:", err)
-		return err
-	}
-	db.Exec("TRUNCATE TABLE tmp_outpatient_histories")
+
+	db.Transaction(func(tx *gorm.DB) error {
+		if err := tx.CreateInBatches(&city_outpatients, 100).Error; err != nil {
+			log.Println("Error:", err)
+			return err
+		}
+		tx.Exec("TRUNCATE TABLE tmp_outpatient_histories")
+
+		return nil
+	})
 	log.Println("Create Success")
 	return nil
 }

@@ -11,7 +11,7 @@ Globals:
     Timeout: 200
 
 Resources:
-  GetDataFunction:
+  CreateOutPatientHistories:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: app/
@@ -86,6 +86,22 @@ Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-  GetDataFunction:
-    Description: "Get Data Function From Data"
-    Value: !GetAtt GetDataFunction.Arn
+  CreateOutPatientHistories:
+    Description: "Create outpatient histories from corona open data"
+    Value: !GetAtt CreateOutPatientHistories.Arn
+  CreateCityOutPatientBatch:
+    Description: "Create city outpatient from tmp data"
+    Value: !GetAtt CreateCityOutPatientBatch.Arn
+  SlackNotificationAPI:
+    Description: "API Gateway endpoint URL for Prod environment for First Function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/notification"
+  SlackNotificationFunction:
+    Description: "Slack notification"
+    Value: !GetAtt SlackNotificationFunction.Arn
+  GetCityPatientAPI:
+    Description: "API Gateway endpoint URL for Prod environment for First Function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/city_outpatients"
+  GetCityPatientFunction:
+    Description: "get city patient"
+    Value: !GetAtt GetCityPatientFunction.Arn
+

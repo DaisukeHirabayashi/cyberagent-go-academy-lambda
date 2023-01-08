@@ -32,7 +32,12 @@ func (s *HospitalService) GetLastDayOutpatientHistory() ([]dao.Hospital, error) 
 	}
 
 	var hospitals []dao.Hospital
-	json.Unmarshal(reponse_body, &hospitals)
+	err = json.Unmarshal(reponse_body, &hospitals)
+
+	if err != nil {
+		log.Println("Error:", err)
+		return nil, err
+	}
 	return hospitals, nil
 }
 

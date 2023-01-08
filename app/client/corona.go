@@ -8,7 +8,13 @@ import (
 
 var host = "https://opendata.corona.go.jp/"
 
-func GetMedicalSystem(time *string) ([]byte, error) {
+type CoronaClientInterface interface {
+	GetMedicalSystem(time *string) ([]byte, error)
+}
+
+type CoronaClient struct{}
+
+func (c *CoronaClient) GetMedicalSystem(time *string) ([]byte, error) {
 	log.Println("Get")
 
 	url := host + "api/covid19DailySurvey/" + *time

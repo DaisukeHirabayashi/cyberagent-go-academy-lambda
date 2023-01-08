@@ -13,10 +13,19 @@ import (
 	"gorm.io/gorm"
 )
 
+type HospitalServiceInterface interface {
+	GetLastDayOutpatientHistory() ([]dao.Hospital, error)
+	CreateOutpatientHistoires(dao_hospitals []dao.Hospital) error
+}
+
+type HospitalService struct {
+	Client client.CoronaClient
+}
+
 // 前日の履歴を取ってくる
-func GetLastDayOutpatientHistory() ([]dao.Hospital, error) {
+func (s *HospitalService) GetLastDayOutpatientHistory() ([]dao.Hospital, error) {
 	time := time.Now().AddDate(0, 0, -1).Format("20060102")
-	reponse_body, err := client.GetMedicalSystem(&time)
+	reponse_body, err := s.Client.GetMedicalSystem(&time)
 	if err != nil {
 		log.Println("Error:", err)
 		return nil, err
@@ -27,7 +36,7 @@ func GetLastDayOutpatientHistory() ([]dao.Hospital, error) {
 	return hospitals, nil
 }
 
-func CreateOutpatientHistoires(dao_hospitals []dao.Hospital) error {
+func (s *HospitalService) CreateOutpatientHistoires(dao_hospitals []dao.Hospital) error {
 	db := db.Init()
 	outpatinet_histories, err := mapper.HospitalDaosToOutpatientHistorys(dao_hospitals)
 	tmp_outpatinet_histories := mapper.OutpatientHistoryEntityToTmpOutPatientHistory(outpatinet_histories)

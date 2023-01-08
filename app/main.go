@@ -13,12 +13,14 @@ func CreateOutpatientHistoires() error {
 	outpatientHistories, err := service.GetLastDayOutpatientHistory()
 	if err != nil {
 		go http.Get("https://wgmjrdremf.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=" + "error GetLastDayOutpatientHistory:" + err.Error())
+		return err
 	}
 
 	err = service.CreateOutpatientHistoires(outpatientHistories)
 
 	if err != nil {
 		go http.Get("https://wgmjrdremf.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=" + "error GetLastDayOutpatientHistory:" + err.Error())
+		return err
 	}
 
 	go http.Get("https://wgmjrdremf.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=" + ":tada:finish_batch_for_create_last_day_city_patient")

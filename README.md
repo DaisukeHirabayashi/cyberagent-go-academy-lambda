@@ -52,8 +52,16 @@ The command will package and deploy your application to AWS, with a series of pr
 You can find your API Gateway Endpoint URL in the output values displayed after deployment.
 
 ### Testing
+This project needs to connection db when test. Please set up db for test.
 
-We use `testing` package that is built-in in Golang and you can simply run the following command to run our tests:
+```shell
+cd app/test
+docker-compose up
+migrate -path db/migrations -database "mysql://root:password@(localhost:3306)/test" up
+```
+
+migration db
+
 
 ```shell
 go test -v ./app/

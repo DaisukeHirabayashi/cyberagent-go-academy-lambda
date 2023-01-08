@@ -8,7 +8,7 @@ import (
 )
 
 func CreateOutpatientHistoires() error {
-	go http.Get("https://wgmjrdremf.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=" + ":rocket:start_batch_for_create_last_day_city_patient")
+	go http.Get("https://wgmjrdremf.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=" + ":rocket:start_batch_for_create_last_day_outpatient_hisotory")
 
 	outpatientHistories, err := service.GetLastDayOutpatientHistory()
 	if err != nil {
@@ -23,7 +23,7 @@ func CreateOutpatientHistoires() error {
 		return err
 	}
 
-	go http.Get("https://wgmjrdremf.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=" + ":tada:finish_batch_for_create_last_day_city_patient")
+	go http.Get("https://wgmjrdremf.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=" + ":tada:finish_batch_for_create_last_day_outpatient_hisotory")
 	return nil
 }
 

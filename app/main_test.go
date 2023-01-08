@@ -20,7 +20,7 @@ func TestMain(m *testing.M) {
 }
 
 func TestHandler(t *testing.T) {
-	t.Run("Unable to get IP", func(t *testing.T) {
+	t.Run("success test", func(t *testing.T) {
 		time := time.Now().AddDate(0, 0, -1).Format("20060102")
 		httpmock.Activate()
 		defer httpmock.DeactivateAndReset()

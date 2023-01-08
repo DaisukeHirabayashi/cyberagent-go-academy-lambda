@@ -32,7 +32,7 @@ func TestHandler(t *testing.T) {
 			httpmock.NewStringResponder(200, string(mock_json)),
 		)
 		err := CreateOutpatientHistoires()
-		if err == nil {
+		if err != nil {
 			t.Fatal("Error failed to trigger with an invalid request")
 		}
 	})

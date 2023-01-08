@@ -1,10 +1,7 @@
 name: go-ci
 
-on:
-  pull_request:
-permissions:
-  contents: read
-  pull-requests: read
+on: [push]
+
 jobs:
   # Common Process of test and lint.
   lint:
@@ -27,5 +24,4 @@ jobs:
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v3
         with:
-          version: v1.29
-          only-new-issues: true
+          working-directory: app

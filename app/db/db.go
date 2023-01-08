@@ -2,6 +2,7 @@ package db
 
 import (
 	"log"
+	"os"
 
 	"database/sql"
 
@@ -11,7 +12,7 @@ import (
 
 func Init() *gorm.DB {
 	log.Print("DB init...")
-	databaseUrl := "academy08:78fqoLQpJ9XXpAab8fVuQmbzdmhACZ@(ca-academy-db.c9ml7do7yvmn.ap-northeast-1.rds.amazonaws.com:3306)/academy08?parseTime=true"
+	databaseUrl := os.Getenv("DATABASEURL")
 	sqlDB, err := sql.Open("mysql", databaseUrl)
 
 	if err != nil {

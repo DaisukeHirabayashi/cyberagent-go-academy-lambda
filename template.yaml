@@ -26,7 +26,7 @@ Resources:
             Schedule: cron(0 10 * * ? *)
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
-          PARAM1: VALUE
+          DATABASEURL: academy08:78fqoLQpJ9XXpAab8fVuQmbzdmhACZ@(ca-academy-db.c9ml7do7yvmn.ap-northeast-1.rds.amazonaws.com:3306)/academy08?parseTime=true
       Role: arn:aws:iam::880843126767:role/go-academy-lambda
   CreateCityOutPatientBatch:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
@@ -43,7 +43,7 @@ Resources:
             Schedule: cron(0 11 * * ? *)
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
-          PARAM1: VALUE
+          DATABASEURL: academy08:78fqoLQpJ9XXpAab8fVuQmbzdmhACZ@(ca-academy-db.c9ml7do7yvmn.ap-northeast-1.rds.amazonaws.com:3306)/academy08?parseTime=true
       Role: arn:aws:iam::880843126767:role/go-academy-lambda
   SlackNotificationFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
@@ -61,7 +61,7 @@ Resources:
             Method: GET
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
-          PARAM1: VALUE
+          DATABASEURL: academy08:78fqoLQpJ9XXpAab8fVuQmbzdmhACZ@(ca-academy-db.c9ml7do7yvmn.ap-northeast-1.rds.amazonaws.com:3306)/academy08?parseTime=true
       Role: arn:aws:iam::880843126767:role/go-academy-lambda
   GetCityPatientFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
@@ -79,7 +79,7 @@ Resources:
             Method: GET
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
-          PARAM1: VALUE
+          DATABASEURL: academy08:78fqoLQpJ9XXpAab8fVuQmbzdmhACZ@(ca-academy-db.c9ml7do7yvmn.ap-northeast-1.rds.amazonaws.com:3306)/academy08?parseTime=true
       Role: arn:aws:iam::880843126767:role/go-academy-lambda
 
 Outputs:

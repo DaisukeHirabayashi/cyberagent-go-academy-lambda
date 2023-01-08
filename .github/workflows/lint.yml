@@ -1,0 +1,27 @@
+name: go-ci
+
+on: [push]
+
+jobs:
+  # Common Process of test and lint.
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: set up
+        uses: actions/setup-go@v3
+        with:
+          go-version: '>=1.19.0'
+        id: go
+      - name: Cache
+        uses: actions/cache@v3
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+      - name: check out
+        uses: actions/checkout@v3
+      - name: install go lint
+        run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+      - name: lint
+        run: golangci-lint run ./...

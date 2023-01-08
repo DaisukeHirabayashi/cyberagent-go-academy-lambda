@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   # Common Process of test and lint.
-  test:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: set up
@@ -24,4 +24,4 @@ jobs:
       - name: install go lint
         run: go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
       - name: lint
-        run: golangci-lint run ./...
+        run: cd app && golangci-lint run ./...

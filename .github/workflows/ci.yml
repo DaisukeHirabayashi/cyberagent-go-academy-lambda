@@ -6,6 +6,15 @@ jobs:
   # Common Process of test and lint.
   setup:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: "mysql:8.0"
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: test
+        options: --health-cmd "mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 5 --name=rakuma_mysql
     steps:
       - name: set up
         uses: actions/setup-go@v3
@@ -14,6 +23,10 @@ jobs:
         id: go
       - name: check out
         uses: actions/checkout@v3
+      - name: install go migrate
+        run: go install -tags mysql github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+      - name: migration
+        run: migrate -path db/migrations -database "mysql://root:password@(localhost:3306)/test" up
 
       # Use cache
       - name: Cache

@@ -1,9 +1,9 @@
 package service
 
 import (
-	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/api/repository"
 	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/db"
 	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/entity"
+	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/repository"
 	"github.com/aws/aws-lambda-go/events"
 )
 

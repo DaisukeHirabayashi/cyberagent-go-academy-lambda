@@ -28,7 +28,7 @@ func TestHandler(t *testing.T) {
 		time := time.Now().AddDate(0, 0, -1).Format("20060102")
 		httpmock.Activate()
 		defer httpmock.DeactivateAndReset()
-		mock_json, _ := os.ReadFile("../test_data/20221230.json")
+		mock_json, _ := os.ReadFile("../../../test_data/20221230.json")
 		httpmock.RegisterResponder("GET", "https://opendata.corona.go.jp/api/covid19DailySurvey/"+time,
 			httpmock.NewStringResponder(200, string(mock_json)),
 		)

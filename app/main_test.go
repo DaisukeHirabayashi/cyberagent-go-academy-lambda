@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"log"
 	"os"
 	"testing"
@@ -22,7 +23,7 @@ func TestMain(m *testing.M) {
 }
 
 func TestHandler(t *testing.T) {
-	t.Run("success test", func(t *testing.T) {
+	t.Run("http request success", func(t *testing.T) {
 		time := time.Now().AddDate(0, 0, -1).Format("20060102")
 		httpmock.Activate()
 		defer httpmock.DeactivateAndReset()
@@ -32,6 +33,20 @@ func TestHandler(t *testing.T) {
 		)
 		err := CreateOutpatientHistoires()
 		if err != nil {
+			t.Fatal("Error failed to trigger with an invalid request")
+		}
+	})
+
+	t.Run("http request failer", func(t *testing.T) {
+		time := time.Now().AddDate(0, 0, -1).Format("20060102")
+		httpmock.Activate()
+		defer httpmock.DeactivateAndReset()
+		response_error := errors.New("errror")
+		httpmock.RegisterResponder("GET", "https://opendata.corona.go.jp/api/covid19DailySurvey/"+time,
+			httpmock.NewErrorResponder(response_error),
+		)
+		err := CreateOutpatientHistoires()
+		if err == nil {
 			t.Fatal("Error failed to trigger with an invalid request")
 		}
 	})

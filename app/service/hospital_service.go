@@ -32,7 +32,12 @@ func (s *HospitalService) GetLastDayOutpatientHistory() ([]dao.Hospital, error) 
 	}
 
 	var hospitals []dao.Hospital
-	json.Unmarshal(reponse_body, &hospitals)
+	err = json.Unmarshal(reponse_body, &hospitals)
+
+	if err != nil {
+		log.Println("Error:", err)
+		return nil, err
+	}
 	return hospitals, nil
 }
 
@@ -46,7 +51,7 @@ func (s *HospitalService) CreateOutpatientHistoires(dao_hospitals []dao.Hospital
 		return err
 	}
 
-	db.Transaction(func(tx *gorm.DB) error {
+	tr_err := db.Transaction(func(tx *gorm.DB) error {
 		if err := tx.CreateInBatches(&tmp_outpatinet_histories, 1000).Error; err != nil {
 			log.Println("Error:", err)
 			return err
@@ -58,6 +63,11 @@ func (s *HospitalService) CreateOutpatientHistoires(dao_hospitals []dao.Hospital
 		}
 		return nil
 	})
+
+	if tr_err != nil {
+		log.Println("Error:", err)
+		return tr_err
+	}
 	return nil
 }
 
@@ -71,7 +81,7 @@ func CreateCityOutPatients() error {
 		return err
 	}
 
-	db.Transaction(func(tx *gorm.DB) error {
+	tr_err := db.Transaction(func(tx *gorm.DB) error {
 		if err := tx.CreateInBatches(&city_outpatients, 100).Error; err != nil {
 			log.Println("Error:", err)
 			return err
@@ -80,6 +90,12 @@ func CreateCityOutPatients() error {
 
 		return nil
 	})
+
+	if tr_err != nil {
+		log.Println("Error:", err)
+		return tr_err
+	}
+
 	log.Println("Create Success")
 	return nil
 }

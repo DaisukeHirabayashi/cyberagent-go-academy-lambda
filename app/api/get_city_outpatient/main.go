@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 
 	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/service"
 	"github.com/aws/aws-lambda-go/events"
@@ -23,7 +22,7 @@ func handler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRespo
 	}
 
 	return events.APIGatewayProxyResponse{
-		Body:       fmt.Sprintf("%s", res),
+		Body:       string(res),
 		StatusCode: 200,
 	}, nil
 }

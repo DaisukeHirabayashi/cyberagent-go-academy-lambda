@@ -9,23 +9,23 @@ import (
 )
 
 func CreateOutpatientHistoires() error {
-	go http.Get("https://wgmjrdremf.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=" + ":rocket:start_batch_for_create_last_day_outpatient_hisotory")
+	go http.Get("https://wgmjrdremf.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=" + ":rocket:start_batch_for_create_last_day_outpatient_hisotory") //nolint:all
 
 	service := service.HospitalService{Client: &client.CoronaClient{}}
 	outpatientHistories, err := service.GetLastDayOutpatientHistory()
 	if err != nil {
-		go http.Get("https://wgmjrdremf.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=" + "error GetLastDayOutpatientHistory:" + err.Error())
+		go http.Get("https://wgmjrdremf.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=" + "error GetLastDayOutpatientHistory:" + err.Error()) //nolint:all
 		return err
 	}
 
 	err = service.CreateOutpatientHistoires(outpatientHistories)
 
 	if err != nil {
-		go http.Get("https://wgmjrdremf.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=" + "error GetLastDayOutpatientHistory:" + err.Error())
+		go http.Get("https://wgmjrdremf.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=" + "error GetLastDayOutpatientHistory:" + err.Error()) //nolint:all
 		return err
 	}
 
-	go http.Get("https://wgmjrdremf.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=" + ":tada:finish_batch_for_create_last_day_outpatient_hisotory")
+	go http.Get("https://wgmjrdremf.execute-api.ap-northeast-1.amazonaws.com/Prod/notification?message=" + ":tada:finish_batch_for_create_last_day_outpatient_hisotory") //nolint:all
 	return nil
 }
 

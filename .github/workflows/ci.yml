@@ -37,6 +37,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: move directory
+        run: cd app
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v3
         with:

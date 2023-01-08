@@ -7,6 +7,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/db"
 	"github.com/jarcoal/httpmock"
 	"github.com/joho/godotenv"
 )
@@ -15,7 +16,9 @@ func TestMain(m *testing.M) {
 	godotenv.Load("./env/.env.test")
 	exitVal := m.Run()
 	log.Println("Do stuff AFTER the tests!")
-
+	db := db.Init()
+	db.Exec("TRUNCATE TABLE outpatient_histories")
+	db.Exec("TRUNCATE TABLE tmp_outpatient_histories")
 	os.Exit(exitVal)
 }
 

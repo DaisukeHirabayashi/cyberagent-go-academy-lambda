@@ -13,7 +13,7 @@ import (
 )
 
 func TestMain(m *testing.M) {
-	godotenv.Load("./env/.env.test")
+	godotenv.Load("../../env/.env.test")
 	exitVal := m.Run()
 	log.Println("Do stuff AFTER the tests!")
 	db := db.Init()

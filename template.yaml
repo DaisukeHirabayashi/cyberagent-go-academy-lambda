@@ -14,8 +14,8 @@ Resources:
   CreateOutPatientHistories:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: app/
-      Handler: app
+      CodeUri: app/batch/create_out_patient_history
+      Handler: create_out_patient_history
       Runtime: go1.x
       Architectures:
         - x86_64

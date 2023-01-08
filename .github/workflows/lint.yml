@@ -1,7 +1,9 @@
 name: go-ci
 
 on: [push]
-
+permissions:
+  contents: read
+  pull-requests: read
 jobs:
   # Common Process of test and lint.
   lint:

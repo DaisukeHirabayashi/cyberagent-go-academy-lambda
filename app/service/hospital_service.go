@@ -19,7 +19,7 @@ type HospitalServiceInterface interface {
 }
 
 type HospitalService struct {
-	Client client.CoronaClient
+	Client client.CoronaClientInterface
 }
 
 // 前日の履歴を取ってくる

@@ -14,7 +14,10 @@ import (
 )
 
 func TestMain(m *testing.M) {
-	godotenv.Load("../../env/.env.test")
+	err := godotenv.Load("../../env/.env.test")
+	if err != nil {
+		log.Println("can't load test env")
+	}
 	exitVal := m.Run()
 	log.Println("Do stuff AFTER the tests!")
 	db := db.Init()

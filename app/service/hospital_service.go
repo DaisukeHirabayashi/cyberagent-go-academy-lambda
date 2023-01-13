@@ -16,6 +16,7 @@ import (
 type HospitalServiceInterface interface {
 	GetLastDayOutpatientHistory() ([]dao.Hospital, error)
 	CreateOutpatientHistoires(dao_hospitals []dao.Hospital) error
+	GetOutpatientHistories() ([]entity.OutpatientHistory, error)
 }
 
 type HospitalService struct {
@@ -39,6 +40,15 @@ func (s *HospitalService) GetLastDayOutpatientHistory() ([]dao.Hospital, error) 
 		return nil, err
 	}
 	return hospitals, nil
+}
+
+func (s *HospitalService) GetOutpatientHistories() ([]entity.OutpatientHistory, error) {
+	db := db.Init()
+	var outpatinet_histories []entity.OutpatientHistory
+	if err := db.Find(&outpatinet_histories).Error; err != nil {
+		return outpatinet_histories, err
+	}
+	return outpatinet_histories, nil
 }
 
 func (s *HospitalService) CreateOutpatientHistoires(dao_hospitals []dao.Hospital) error {

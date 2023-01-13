@@ -26,7 +26,15 @@ func (*Server) GetOutpatientHistories(_ *emptypb.Empty, stream pb.OutpatientHist
 	}
 
 	for _, outpatinet_history := range outpatinet_histories {
-		stream.Send(mapper.OutpatientHistoryEntityToPbOutpatientHistory(outpatinet_history))
+		err := stream.Send(mapper.OutpatientHistoryEntityToPbOutpatientHistory(outpatinet_history))
+
+		if err != nil {
+			return status.Errorf(
+				codes.Internal,
+				fmt.Sprintf("Unknown internal error: %v", err),
+			)
+		}
+
 	}
 
 	return nil

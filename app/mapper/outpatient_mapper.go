@@ -6,6 +6,8 @@ import (
 
 	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/dao"
 	"github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/entity"
+	pb "github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/proto"
+	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 func HospitalDaosToOutpatientHistorys(dao_hospitals []dao.Hospital) ([]entity.OutpatientHistory, error) {
@@ -31,4 +33,23 @@ func OutpatientHistoryEntityToTmpOutPatientHistory(outpatient_histories []entity
 		tmp_outpatient_histories = append(tmp_outpatient_histories, tmp_outpatient_history)
 	}
 	return tmp_outpatient_histories
+}
+
+func OutpatientHistoryEntityToPbOutpatientHistory(outpatient_history entity.OutpatientHistory) *pb.OutpatientHistory {
+	return &pb.OutpatientHistory{
+		Id:           uint64(outpatient_history.Id),
+		FacilityId:   outpatient_history.FacilityId,
+		ZipCod:       outpatient_history.ZipCod,
+		PrefName:     outpatient_history.PrefName,
+		FacilityAddr: outpatient_history.FacilityAddr,
+		FacilityTel:  outpatient_history.FacilityTel,
+		SubmitDate:   timestamppb.New(outpatient_history.SubmitDate),
+		FacilityType: outpatient_history.FacilityType,
+		AnsType:      outpatient_history.AnsType,
+		LocalGovCode: outpatient_history.LocalGovCode,
+		CityName:     outpatient_history.CityName,
+		FacilityCode: outpatient_history.FacilityCode,
+		CreatedAt:    timestamppb.New(outpatient_history.CreatedAt),
+		UpdatedAt:    timestamppb.New(outpatient_history.UpdatedAt),
+	}
 }

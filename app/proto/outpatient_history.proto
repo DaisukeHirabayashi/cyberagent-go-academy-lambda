@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "github.com/DaisukeHirabayashi/cyberagent-go-academy-lambda/proto";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+message outpatient_history {
+    uint64 id = 1;
+    string facility_id = 2;
+    string facility_name = 3;
+    string zip_cod = 4;
+    string pref_name = 5;
+    string facility_addr = 6;
+    string facility_tel = 7;
+    google.protobuf.Timestamp submit_date = 8;
+    string facility_type = 9;
+    string ans_type = 10;
+    string local_gov_code = 11;
+    string city_name = 12;
+    string facility_code = 13;
+    google.protobuf.Timestamp created_at = 14;
+    google.protobuf.Timestamp updated_at = 15;
+}
+
+service OutpatientHistoryService {
+    rpc GetOutpatientHistories (google.protobuf.Empty) returns (stream outpatient_history);
+}

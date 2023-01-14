@@ -19,6 +19,16 @@ The `sam build` command is wrapped inside of the `Makefile`. To execute this sim
 make
 ```
 
+### Local Build for grpc
+Please change the following db url to the actual one.(Soryy...)
+```
+databaseUrl := os.Getenv("DATABASEURL")
+sqlDB, err := sql.Open("mysql", databaseUrl)
+
+->
+sqlDB, err := sql.Open("mysql", 'databaseurl')
+```
+
 ### Local development
 
 **Invoking function locally through local API Gateway**

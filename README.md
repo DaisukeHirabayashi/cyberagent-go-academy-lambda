@@ -29,6 +29,17 @@ sqlDB, err := sql.Open("mysql", databaseUrl)
 sqlDB, err := sql.Open("mysql", 'databaseurl')
 ```
 
+And please build
+```
+cd app
+go build  -o ./bin/ ./grpc
+go build  -o ./bin/ ./grpc_client
+
+./bin/grpc
+./bin/grpc_client
+```
+
+
 ### Local development
 
 **Invoking function locally through local API Gateway**

@@ -28,11 +28,11 @@ func main() {
 }
 
 func getOutpatientHistories(c pb.OutpatientHistoryServiceClient) {
-	log.Println("---listBlog was invoked---")
+	log.Println("---OutpatientHistories was invoked---")
 	stream, err := c.GetOutpatientHistories(context.Background(), &emptypb.Empty{})
 
 	if err != nil {
-		log.Fatalf("Error while calling ListBlogs: %v\n", err)
+		log.Fatalf("Error while calling OutpatientHistories: %v\n", err)
 	}
 
 	for {

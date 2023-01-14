@@ -14,7 +14,7 @@ import (
 )
 
 func (*Server) GetOutpatientHistories(_ *emptypb.Empty, stream pb.OutpatientHistoryService_GetOutpatientHistoriesServer) error {
-	log.Println("ListBlogs was invoked")
+	log.Println("OutpatientHistories was invoked")
 
 	service := service.HospitalService{Client: &client.CoronaClient{}}
 	outpatinet_histories, err := service.GetOutpatientHistories()
